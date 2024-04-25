@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Area1 from "./components/Area1";
+import Galeria from "./components/Galeria";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+  const [paginaActual, setPaginaActual] = useState('uno');
+
+  const paginaArea = () => {
+    setPaginaActual('uno')
+  }
+
+  const paginaGaleria = () => {
+    setPaginaActual('dos')
+  }
+
+  return(
+    <div className='container-fluid d-flex flex-wrap justify-content-center bg-dark'>
+      <Header text={paginaActual === 'uno' ? 'AREA 1' : 'GALERIA'}/>
+      {
+        paginaActual === 'uno' && <Area1/>
+      }  
+      {
+        paginaActual === 'dos' && <Galeria/>
+      }    
+      <Footer onPaginaArea={paginaArea} onPaginaGaleria={paginaGaleria} paginaActual={paginaActual}/>
     </div>
   );
 }
